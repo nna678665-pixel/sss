@@ -1,6 +1,5 @@
 students = []
 
-
 def student_menu(student_list):
     print("=================== Students Information ====================")
     print("1. Add Students Information")
@@ -296,20 +295,54 @@ def delete_students():
 
 
 
-# first BUG: Putting 'while not student_id.isdigit()' inside 'for student in students:'
+# First BUG: Putting 'while not student_id.isdigit()' inside 'for student in students:'
 # causes a bug when the list is empty: the for-loop never runs, so the digit check never runs!
 # FIX: Check if it is a digit FIRST, and check for duplicates in the list SECOND.
 # while not student_id.isdigit():
 #     print("Please Enter a Valid ID. Students ID can't contain alphabets!")
 #     student_id = input("Enter Students ID: ")
 
+
+
 # Secondary BUG: 'student_phone' is indented inside the 'else:' block of course validation!
 # If the user enters an empty course, Python skips the 'else:' branch,
 # meaning 'student_phone' is NEVER created. 
 # Down at the bottom, Python crashes with: UnboundLocalError: local variable 'student_phone' referenced before assignment.
 # FIX: Pull 'student_phone' out of the 'else:' block and validate each input one by one.
-
 # if not student_course.strip():
 #     ...
 # else:
 #     student_phone = input("Enter Studnet Phone Number: ")  # <-- WRONG INDENTATION
+
+
+# third BUG MISTAKE: Using double quotes inside double quotes: f"Student Name: {student["Name"]}"
+# In Python 3.11 and older, this causes a SyntaxError because Python gets confused where the string ends.
+# FIX: Use single quotes inside the curly brackets: {student['Name']}
+
+
+# for student in students:
+    # fourth BUG: If the first student in the list does NOT match the ID, 
+    # it immediately prints "ID is not in our system" for EVERY non-matching student!
+    # Also, using 'students.remove()' inside a running loop can cause Python to skip elements.
+    # FIX: Use a boolean flag like 'found = False', remove the student, and break immediately.
+    # if student["Id"] != searchs:
+    #     print(f"The Students ID {searchs} is not in our system")
+    # else:
+    #     students.remove(student)
+
+# case 4:
+    # fifth BUG MISTAKE: Copy-paste error from Case 3! 
+    # The banner says "Enter Student Course", but the input asks for "Enter New Student PhoneNumber".
+    # FIX: Update the text banner to match the input.
+    # print("==================Enter Student Course==================")
+    # new_phone = input("Enter New Student PhoneNumber: ")
+
+
+# try:
+#     options = int(input("Enter option to active application: "))
+# except ValueError:
+#     print("Invalid Options. Please enter a valid number(1-6)")
+    # Six BUG: Without 'continue' here, Python will keep running down into 'if options == 1:'!
+    # If 'options' doesn't exist yet, it crashes with NameError.
+    # FIX: Add 'continue' inside the except block so the loop restarts safely.
+    # continue
