@@ -16,7 +16,7 @@ def login(admin_lists, students):
                 print("==========Rigister as a Register======")
                 enter_user = input("Enter User Name: ")
                 enter_pw = input("Enter Password: ")
-                if admin_lists.get(enter_user) == enter_pw:
+                if enter_user == "Admin" and admin_lists.get("Admin") == enter_pw:
                     print("Login Successful")
                     return "Admin"
                 else:
@@ -30,7 +30,7 @@ def login(admin_lists, students):
                   print("==========Rigister as a Teacher======")
                   enter_user = input("Enter User Name: ")
                   enter_pw = input("Enter Password: ")
-                  if admin_lists.get(enter_user) == enter_pw:
+                  if enter_user == "Teacher" and admin_lists.get("Teacher") == enter_pw:
                       print("Login Successful")
                       return "Teacher"
                   else:

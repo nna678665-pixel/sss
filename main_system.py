@@ -7,11 +7,12 @@ from students_register_sms import (
     delete_students,
     show_student
 )
+
 from Teacher_sms import student_attendance
+
 from auth_system import login
 
 admin_lists = {"Admin": "1234", "Teacher": "123456"}
-
 def admin_dashboard():
     while True:
         student_menu(students)
@@ -23,14 +24,19 @@ def admin_dashboard():
 
         if options == 1:
             add_student()
+
         elif options == 2:
             show_student()
+
         elif options == 3:
             search_students()
+
         elif options == 4:
             update_students()
+
         elif options == 5:
             delete_students()
+
         elif options == 6:
             print("\nReturning to Login Portal...")
             break
@@ -76,6 +82,7 @@ def main():
             print("\n======================================================")
             print("Thank you for using our application! System shutting down.")
             print("======================================================")
+
             break
 
 

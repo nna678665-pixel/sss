@@ -1,24 +1,35 @@
-from students_register_sms import students
-
-
 def student_attendance(students_list):
-    print("\n================ Attendance Menu ================")
-    print("1. Students Daily Attendance Management")
-    print("2. Student Score Management")
-    print("3. Back to Main Menu")
+    while True:
+        print("\n================ Attendance Menu ================")
+        print("1. Students Attendance Management")
+        print("2. Student Score Management")
+        print("3. Back to Main Menu")
 
-    try:
-        chose = int(input("Enter choice to access: "))
-    except ValueError:
-        print("Please enter a valid number.")
-        return
+        try:
+            chose = int(input("Enter choice to access: "))
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
 
-    if chose == 1:
-        weekly_students(students_list)
-    elif chose == 2:
-        print("Score management coming soon!")
-    elif chose == 3:
-        ...
+        if chose == 1:
+            print("========================Attedndance Menu==================")
+            print("1.Daily students Attedndance ")
+            print("2.Weekly students Attedndance ")
+
+            at = int(input("Enter chose to actiy program: "))
+            match at:
+                case 1:
+                    print("=============Daily students Attedndance===========: ")
+                    weekly_students(students_list)
+                case 2:
+                    print("=============Weekly students Attedndance===========")
+        elif chose == 2:
+            print("Score management coming soon!")
+        elif chose == 3:
+            print("Returning to Main Menu...")
+            break
+        else:
+            print("Please choose 1, 2, or 3.")
 
 
 def weekly_students(students_list):
@@ -37,59 +48,54 @@ def weekly_students(students_list):
             continue
 
         if choice == 1:
-            print("================== Weekly Student Attendance ==================")
+            print("================== Submit Students Attendance ==================")
+            if not students_list:
+                print("No students enrolled yet.")
+            else:
+                date = input("Enter date (e.g. 2026-09-27): ")
+                for student in students_list:
+                    # Make sure the student has an Attendance dictionary
+                    if "Attendance" not in student:
+                        student["Attendance"] = {}
+                    
+                    status = input(f"Enter status for {student['Name']} (Present/Absent): ")
+                    student["Attendance"][date] = status
+                print("Attendance submitted successfully!")
+
+        elif choice == 2:
+            print("================== View Students Attendance ==================")
             if not students_list:
                 print("No students enrolled yet.")
             else:
                 for student in students_list:
-                    print(student)
+                    print(f"ID: {student.get('Id')} | Name: {student.get('Name')} | Attendance: {student.get('Attendance', 'No record')}")
+
+        elif choice == 3:
+            print("================== Search Student Attendance ==================")
+            search_id = input("Enter Student ID to search: ")
+            found = False
+            for student in students_list:
+                if str(student.get("Id")) == str(search_id):
+                    print(f"Name: {student.get('Name')} | Attendance: {student.get('Attendance', 'No record')}")
+                    found = True
+                    break
+            if not found:
+                print("Student ID not found.")
+
+        elif choice == 4:
+            print("================== Delete Student Attendance ==================")
+            delete_id = input("Enter Student ID to clear attendance: ")
+            found = False
+            for student in students_list:
+                if str(student.get("Id")) == str(delete_id):
+                    student["Attendance"] = {}
+                    print(f"Attendance records cleared for {student.get('Name')}.")
+                    found = True
+                    break
+            if not found:
+                print("Student ID not found.")
+
         elif choice == 5:
             break
         else:
             print("Option not implemented yet.")
-
-
-# This block ONLY runs if you run Teacher_sms.py directly,
-# but it will NOT interfere when imported into main_system.py!
-# if __name__ == "__main__":
-#     student_attendance(students)
-
-
-
-# BUG: Calling functions or running while-loops out in the open at the file level
-# means they run IMMEDIATELY when this file is imported by another script.
-# When 'main_system.py' imports this file, it freezes here before main even starts!
-# FIX: Wrap standalone test code inside: if __name__ == "__main__":
-
-# student_attendance(students)  # <-- WRONG: Runs during import!
-
-# while True:  # <-- WRONG: Freezes main_system.py during import!
-#     options = int(input("Enter Option to active program: "))
-
-
-# def Weekly_Students():
-    # BUG: Checking 'if chose == 1:' BEFORE asking the user for 'chose' below!
-    # Python executes from top to bottom, so 'chose' does not exist yet.
-    # CRASH: UnboundLocalError: cannot access local variable 'chose' where it is not associated with a value
-    # FIX: Ask for user input FIRST, then check the value with 'if'.
-    
-    #if chose == 1:
-        # ...
-    #chose = int(input("Enter Chose to Access application: "))  # <-- Too late!
-
-
-# def Weekly_Students():
-   # ...
-    # BUG: Calling 'Weekly_Students()' inside itself with no condition or return
-    # creates an endless function loop that eats up Python's memory.
-    # CRASH: RecursionError: maximum recursion depth exceeded
-    # FIX: Do NOT use recursion for menus. Use a standard 'while True:' loop instead.
-   # Weekly_Students()  # <-- Dangerous self-call!
-
-
-# MISTAKE: Duplicate option numbers in the menu display.
-# Users will not know what number to type to delete attendance.
-# FIX: Number options sequentially (1, 2, 3, 4, 5).
-
-# print("3.Search for student Attdendance")  #[cite: 4]
-# print("3.Detelt Student Attdendance")      # <-- Should be 4![cite: 4]
