@@ -33,7 +33,31 @@ def student_attendance(students_list):
                     continue
                  
         elif chose == 2:
-            print("Score management coming soon!")
+            print("\n==================Student Scores  Management==================")
+            if not students_list:
+                print("No students enrolled yet.")
+            else:
+                for student in students_list:
+                    print("============Students Scores Board=====================")
+                    print(f"Student ID   : {student.get('Id')}")
+                    print(f"Student Name : {student.get('Name')}")
+
+                    scores = student.get("Scores")
+
+                    if not scores:
+                        print("Score Status : No scores recorded yet.")
+                    else:
+                        print("--- Subject Scores ---")
+                        total = 0
+
+                        for subject, mark in scores.items():
+                            print(f"  • {subject:<25} : {mark}/100")
+                            total += mark
+
+                            avg = total / len(scores)
+                            print(f"Total Score is {total}")
+                            print(f"Average Score is {avg}")
+                
         elif chose == 3:
             print("Returning to Main Menu...")
             break
