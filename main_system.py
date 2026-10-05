@@ -49,17 +49,27 @@ def student_view(student_data):
         print("\n================ STUDENT PORTAL ================")
         print(f"Student ID : {student_data.get('Id')}")
         print(f"Name       : {student_data.get('Name')}")
-        print(f"Course     : {student_data.get('Course', 'N/A')}")
+        print(f"Course     : {student_data.get('Students Course', 'N/A')}")
         print(f"Attendance : {student_data.get('Attendance', 'No records yet')}")
-        print("================================================")
-        print("1. Log Out")
+        
         scores = student_data.get("Scores")
         if not scores:
             print("Scores     : No scores recorded yet.")
         else:
             print("Scores: ")
             for subject, mark in scores.items():
-                print(f"{subject: <25}: {mark / 100}")
+                print(f"{subject: <25}: {mark}  / 100")
+                total = +mark
+
+                avg = total / len(scores)
+                print("  ---------------------------------")
+                print(f"  Total Score: {total}")
+                print(f"  Average: {avg:.2f}")
+
+                
+        print("================================================")
+        print("1. Log Out")
+
         choice = input("Select option: ")
         if choice == "1":
             print("Logging out...\n")

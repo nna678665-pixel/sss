@@ -13,53 +13,98 @@ def student_attendance(students_list):
 
         if chose == 1:
             print("========================Students Attendance Management Menu==================")
-            print("1.Daily students Attedndance ")
-            print("2.Weekly students Attedndance ")
+            print("1. Daily students Attendance")
+            print("2. Weekly students Attendance")
             print("3. Back")
             try:
-                ad = int(input("Enter chose to actiy program: "))
+                ad = int(input("Enter choice to activate program: "))
             except ValueError:
                 print("Please enter a valid number.")
                 continue
 
             match ad:
                 case 1:
-                    print("=============Daily students Attedndance===========: ")
+                    print("=============Daily students Attendance===========: ")
                     weekly_students(students_list, mode="Daily")
                 case 2:
-                    print("=============Weekly students Attedndance===========")
+                    print("=============Weekly students Attendance===========")
                     weekly_students(students_list, mode="Weekly")
                 case 3:
                     continue
-                 
+
         elif chose == 2:
-            print("\n==================Student Scores  Management==================")
+            student_scores(students_list)  # <-- Calls score management!
+
+        elif chose == 3:
+            print("Returning to Main Menu...")
+            break
+        else:
+            print("Please choose 1, 2, or 3.")
+
+
+def student_scores(students_list):
+    while True:
+        print("\n================== Student Scores Management ==================")
+        print("1. Submit Student Scores")
+        print("2. View Students Score Board")
+        print("3. Back")
+
+        try:
+            choice = int(input("Enter Choice: "))
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
+
+        if choice == 1:
+            print("\n================== Submit Student Scores ==================")
+            if not students_list:
+                print("No students enrolled yet.")
+            else:
+                subject = input("Enter Subject Name (e.g. Coding Skill, Understanding Workflow): ")
+                for student in students_list:
+                    if "Scores" not in student:
+                        student["Scores"] = {}
+
+                    while True:
+                        try:
+                            score = float(input(f"Enter {subject} score for {student['Name']} (0-100): "))
+                            if 0 <= score <= 100:
+                                student["Scores"][subject] = score
+                                break
+                            else:
+                                print("Score must be between 0 and 100!")
+                        except ValueError:
+                            print("Please enter a valid numeric score.")
+
+                print(f"Scores for {subject} submitted successfully!")
+
+        elif choice == 2:
+            print("\n============ Students Scores Board ============")
             if not students_list:
                 print("No students enrolled yet.")
             else:
                 for student in students_list:
-                    print("============Students Scores Board=====================")
+                    print("----------------------------------------------------------")
                     print(f"Student ID   : {student.get('Id')}")
                     print(f"Student Name : {student.get('Name')}")
-
+                    
                     scores = student.get("Scores")
-
                     if not scores:
                         print("Score Status : No scores recorded yet.")
                     else:
                         print("--- Subject Scores ---")
                         total = 0
-
                         for subject, mark in scores.items():
                             print(f"  • {subject:<25} : {mark}/100")
                             total += mark
+                        
+                        avg = total / len(scores)
+                        print(f"  Total Score : {total}")
+                        print(f"  Average     : {avg:.2f}")
+                print("----------------------------------------------------------")
 
-                            avg = total / len(scores)
-                            print(f"Total Score is {total}")
-                            print(f"Average Score is {avg}")
-                
-        elif chose == 3:
-            print("Returning to Main Menu...")
+        elif choice == 3:
+            print("Returning to Attendance Menu...")
             break
         else:
             print("Please choose 1, 2, or 3.")
