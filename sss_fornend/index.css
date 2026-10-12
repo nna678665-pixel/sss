@@ -1,0 +1,283 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+/* 2. Fullscreen background */
+.main {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #18092b 0%, #2e0854 50%, #631993 100%);
+  display: flex;
+  justify-content: center; 
+  align-items: center;   
+  padding: 24px;
+}
+
+/* 3. Base desktop card (Default layout for laptops & desktops) */
+.sub-main {
+  width: 100%;
+  max-width: 950px;             
+  min-height: 600px;
+  background: rgba(25, 10, 45, 0.45); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  padding: 32px;
+  position: relative;
+  display: flex;                
+  align-items: stretch;
+  gap: 32px;
+}
+
+/* 4. Left image container */
+.image-card {
+  width: 440px;               
+  min-height: 540px;         
+  flex-shrink: 0;             
+  border-radius: 16px;
+  background-image: url("images.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 32px 24px;
+}
+
+.image-overlay-text {
+  text-align: center;
+  color: white;
+  font-family: sans-serif;
+}
+
+.image-overlay-text h3 {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.dot.active {
+  background-color: #ffffff;
+}
+
+.form-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  padding: 20px 10px;
+  color: white;
+}
+
+.form-title{
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  font-family: sans-serif;
+}
+
+.form-subtitle{
+  font-size: 14px;
+  color: rgba(225, 225, 225, 0.6);
+  margin-bottom: 28px;
+  font-family: sans-serif;
+}
+
+.form-subtitle a {
+  color: #a855f7;
+  text-decoration: underline;
+  margin-left: 4px;
+  font-family: sans-serif;
+}
+
+.form-subtitle a:hover{
+  color: #c084fc;
+}
+
+.sub-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 10px;
+}
+
+/* Added comma between selectors */
+.Username, .pw{
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.Username:focus,.pw:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: #631993;
+}
+
+/* Dark placeholder color so it shows clearly on white */
+.Username::placeholder,.pw::placeholder {
+  color:rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 14px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #7c3aed;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.register-btn:hover{
+  background: #6d28d9;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+}
+
+.register-btn:active{
+  transform: scale(0.98);
+}
+
+.login-btn{
+  width: 100%;
+  padding: 14px 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.login-btn:hover{
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+}
+
+.login-btn:active{
+  transform: scale(0.98);
+}
+
+/* 1. Ensure the whole row centers its children vertically */
+.options-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;          
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 1;                
+}
+
+/* 2. Vertically align the checkbox and its label text */
+.show-pw {
+  display: inline-flex;
+  align-items: center;            
+  gap: 8px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  user-select: none;
+  line-height: 1;
+}
+
+/* 3. Strip browser margins from the checkbox */
+.show-pw input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  margin: 0;                   
+  cursor: pointer;
+  accent-color: #7c3aed;
+  display: block;
+}
+
+/* 4. Match the link alignment */
+.forgot-link {
+  color: #c084fc;
+  text-decoration: none;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+  color: #e9d5ff;
+  text-decoration: underline;
+}
+
+/* --- Media Queries (Trigger ONLY when screens get smaller) --- */
+/* Tablets & Mobile (under 850px): Stack image on top of form */
+@media (max-width: 850px) {
+  .sub-main {
+    flex-direction: column;    
+    max-width: 480px;
+    padding: 24px;
+  }
+
+  .image-card {
+    width: 100%;                
+    min-height: 240px;         
+  }
+}
+
+/* Small Phones (under 480px) */
+@media (max-width: 480px) {
+  .main {
+    padding: 12px;
+  }
+
+  .sub-main {
+    width: 100%;
+    padding: 18px 14px;
+    border-radius: 14px;
+  }
+
+  .image-card {
+    min-height: 200px;
+  }
+}
